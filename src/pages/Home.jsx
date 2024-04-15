@@ -46,7 +46,7 @@ function Home() {
 
     // filtering all the data from the API
     const sortedFilteredSkills = user?.skills?.filter((item) => item.enabled)?.sort((a, b) => a.sequence - b.sequence);
-    const sortedFilteredProject = user?.projects?.filter((item) => item.enabled)?.sort((a, b) => a.sequence - b.sequence);
+    const sortedFilteredProjects = user?.projects?.filter((item) => item.enabled)?.sort((a, b) => a.sequence - b.sequence);
     const filteredServices = user?.services?.filter((item) => item.enabled);
     const filteredTestimonials = user?.testimonials?.filter((item) => item.enabled);
     const filteredSocialHandles = user?.social_handles?.filter((item) => item.enabled);
@@ -58,11 +58,11 @@ function Home() {
     }
     return (
         <>
-            <Header />
-            <Hero />
-            <About />
-            <Skills />
-            <Projects />
+            <Header title={user?.about?.name} />
+            <Hero about={user?.about} />
+            <About about={user?.about} />
+            <Skills skills={sortedFilteredSkills} />
+            <Projects projects={sortedFilteredProjects} />
             <Services />
             <Timeline />
             <Testimonial />

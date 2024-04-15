@@ -5,5 +5,10 @@
 body {
     background-color: black;
     color: lightgray;
-    overflow: hidden;
+}
+
+h1 {
+    font-size: 2rem;
+    color: white;
+    font-weight: 400;
 }
