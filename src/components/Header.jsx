@@ -19,7 +19,7 @@ const Header = ({ title }) => {
         <>
             <header
                 className={`p-5 w-full transition-transform ease-in duration-200 transform 
-                ${scrollPos > 100 && `fixed top-0 z-10 bg-neutral-800 p-0`}
+                ${scrollPos > 100 && `fixed top-0 z-50 bg-neutral-800 p-0`}
                 flex justify-center items-center`}
             >
                 <div className="flex lg:w-full w-[540px] md:min-w-[720px] justify-between items-center ">

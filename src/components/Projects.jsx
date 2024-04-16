@@ -6,7 +6,7 @@ const Projects = ({ projects }) => {
                 {projects?.map((project, index) => (
                     <div
                         key={project?._id}
-                        className="group hover:shadow-sm hover:shadow-neutral-600 cursor-pointer relative w-[360px] mb-24 rounded-lg h-[490px]"
+                        className="group hover:shadow-sm hover:shadow-neutral-600 cursor-pointer relative w-[360px] mb-24 rounded-lg h-auto md:h-[550px]"
                     >
                         <h1 className="absolute z-10 hidden group-hover:flex justify-center items-center w-full font-serif tracking-wider top-[20%] text-4xl">
                             Project {index + 1}
