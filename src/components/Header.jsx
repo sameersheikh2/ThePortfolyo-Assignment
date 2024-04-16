@@ -19,10 +19,10 @@ const Header = ({ title }) => {
         <>
             <header
                 className={`p-5 w-full transition-transform ease-in duration-200 transform 
-                ${scrollPos > 100 && `fixed top-0 opacity-100 bg-neutral-800 p-0`}
+                ${scrollPos > 100 && `fixed top-0 z-10 bg-neutral-800 p-0`}
                 flex justify-center items-center`}
             >
-                <div className="flex lg:w-full w-[540px] md:min-w-[720px] justify-between items-center p-2">
+                <div className="flex lg:w-full w-[540px] md:min-w-[720px] justify-between items-center ">
                     <h1 className="font-serif">{title.split(' ')[0]}</h1>
                     <nav className="lg:block hidden">
                         <ul className="flex font-medium justify-center items-center gap-6">

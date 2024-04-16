@@ -63,8 +63,8 @@ function Home() {
             <About about={user?.about} />
             <Skills skills={sortedFilteredSkills} />
             <Projects projects={sortedFilteredProjects} />
-            <Services />
-            <Timeline />
+            <Services services={filteredServices} />
+            <Timeline educations={filteredEducation} experiences={filteredExperience} />
             <Testimonial />
             <Contact />
         </>
