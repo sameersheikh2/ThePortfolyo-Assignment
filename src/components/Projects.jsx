@@ -1,7 +1,7 @@
 const Projects = ({ projects }) => {
     return (
         <div className="mt-32 w-[85%] m-auto">
-            <h2 className="text-neutral-400 text-3xl tracking-wider mb-8">My Projects</h2>
+            <h2 className="text-neutral-400 text-xl tracking-wider mb-8">Projects</h2>
             <div className="flex justify-center gap-4 lg:justify-between mt-10 items-center flex-wrap">
                 {projects?.map((project, index) => (
                     <div

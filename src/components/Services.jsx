@@ -1,7 +1,7 @@
 const Services = ({ services }) => {
     return (
         <div className="w-[85%] mt-28 m-auto">
-            <h2 className="text-neutral-400 text-3xl tracking-wider mb-8">Services That I Provide</h2>
+            <h2 className="text-neutral-400 text-xl tracking-wider mb-8">Services That I Provide</h2>
             <div className="flex flex-wrap gap-4 justify-around items-center">
                 {services?.map((service) => (
                     <div
