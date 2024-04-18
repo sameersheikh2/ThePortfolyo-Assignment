@@ -34,7 +34,7 @@ const Timeline = ({ educations, experiences }) => {
                     EDUCATION
                 </button>
             </div>
-            <h2 className="text-neutral-400 text-3xl tracking-wider mb-8">{timelineSections.showEducation ? 'Education' : 'Experience'}</h2>
+            <h2 className="text-neutral-400 text-3xl tracking-wider mb-8">{timelineSections.isEducationVisible ? 'Education' : 'Experience'}</h2>
             {timelineSections.isExperienceVisible
                 ? experiences?.map((experience) => (
                       <div key={experience._id} className="flex lg:flex-row flex-col justify-between lg:items-center">
