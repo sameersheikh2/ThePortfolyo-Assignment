@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import About from '../components/About';
@@ -9,9 +10,11 @@ import Projects from '../components/Projects';
 import Timeline from '../components/Timeline';
 import Testimonial from '../components/Testimonial';
 import Contact from '../components/Contact';
+import CustomCursor from '../components/CustomCursor';
 const Home = () => {
     const params = useParams();
     const navigate = useNavigate();
+    const countRef = useRef(0);
 
     const userId = '65b3a22c01d900e96c4219ae'; //John doe
 
@@ -31,8 +34,10 @@ const Home = () => {
 
                 document.title = `${userData?.user?.about?.name + ' - ' + userData?.user?.about?.title}`;
                 setUser(userData?.user);
-                setIsLoading(false);
-                document.body.classList.remove('loaded');
+                setTimeout(() => {
+                    setIsLoading(false);
+                    document.body.classList.remove('loaded');
+                }, 2000);
             } catch (error) {
                 navigate('/');
                 setIsLoading(true);
@@ -54,7 +59,23 @@ const Home = () => {
     const filteredExperience = user?.timeline?.filter((item) => !item.forEducation && item.enabled);
 
     if (isLoading) {
-        return <div className="welcome w-full h-screen bg-black flex items-center justify-center text-center">Loading..</div>;
+        return (
+            <div className="overflow-hidden w-full h-screen bg-white flex items-center justify-center text-center">
+                <motion.div
+                    className="bg-black text-white flex justify-center items-center rounded-full w-24 h-24"
+                    animate={{
+                        scale: [1, 2, 1, 2, 100],
+                    }}
+                    transition={{
+                        duration: 2,
+                        ease: 'easeInOut',
+                        times: [0, 0.2, 0.5, 0.8, 1],
+                        repeat: Infinity,
+                        repeatDelay: 1,
+                    }}
+                ></motion.div>
+            </div>
+        );
     }
     return (
         <>
@@ -66,7 +87,7 @@ const Home = () => {
             <Services services={filteredServices} />
             <Timeline educations={filteredEducation} experiences={filteredExperience} />
             <Testimonial testimonials={filteredTestimonials} />
-            <Contact social_handles={filteredSocialHandles} about={user?.abouts} />
+            <Contact social_handles={filteredSocialHandles} about={user?.about} />
         </>
     );
 };

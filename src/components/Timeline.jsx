@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { motion, useAnimation, useInView } from 'framer-motion';
 
 const Timeline = ({ educations, experiences }) => {
     const [timelineSections, setTimelineSections] = useState({
@@ -6,8 +7,23 @@ const Timeline = ({ educations, experiences }) => {
         isEducationVisible: false,
     });
 
+    const controls = useAnimation();
+    const ref = useRef(null);
+    const inView = useInView(ref);
+
+    useEffect(() => {
+        if (inView) {
+            controls.start('visible');
+        }
+    }, [controls, inView]);
+
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        return `${date.toLocaleString('en-us', { month: 'long' })} ${date.getFullYear()}`;
+    };
+
     return (
-        <div className="w-[85%] m-auto mt-40">
+        <div id="timeline" className="w-[85%] m-auto mt-40">
             <div className="flex justify-center mb-10 items-center gap-5">
                 <button
                     type="button"
@@ -34,35 +50,58 @@ const Timeline = ({ educations, experiences }) => {
                     EDUCATION
                 </button>
             </div>
-            <h2 className="text-neutral-400 text-3xl tracking-wider mb-8">{timelineSections.isEducationVisible ? 'Education' : 'Experience'}</h2>
+            <motion.h2
+                ref={ref}
+                initial={{ opacity: 0, y: -50 }}
+                animate={controls}
+                variants={{ visible: { opacity: 1, y: 0 } }}
+                transition={{ delay: 0.5, duration: 0.8, ease: 'easeInOut' }}
+                className="text-neutral-400 text-3xl tracking-wider mb-8"
+            >
+                {timelineSections.isEducationVisible ? 'Education' : 'Experience'}
+            </motion.h2>
             {timelineSections.isExperienceVisible
                 ? experiences?.map((experience) => (
-                      <div key={experience._id} className="flex lg:flex-row flex-col justify-between lg:items-center">
+                      <motion.div
+                          key={experience._id}
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          variants={{ visible: { opacity: 1, y: 0 } }}
+                          transition={{ delay: 0.6, duration: 1, ease: 'easeInOut' }}
+                          className="flex lg:flex-row flex-col justify-between lg:items-center"
+                      >
                           <div className="flex flex-col gap-1">
                               <h1>{experience?.jobTitle}</h1>
                               <h2 className="text-sm text-orange-400">{experience.company_name}</h2>
                           </div>
                           <div className="flex flex-col mb-8">
-                              <h3>{experience?.startDate}</h3>
+                              <h3>{`${formatDate(experience?.startDate)} - ${formatDate(experience?.endDate)}`}</h3>
                               <p className="text-xl font-light"> {experience?.summary}</p>
                               <h3>{experience?.jobLocation}</h3>
                           </div>
                           <div className="border border-b opacity-15 mb-7 bg-neutral-800"></div>
-                      </div>
+                      </motion.div>
                   ))
                 : educations?.map((education) => (
-                      <div key={education._id} className="flex lg:flex-row flex-col justify-between lg:items-center">
+                      <motion.div
+                          key={education._id}
+                          initial={{ opacity: 0, y: 50 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          variants={{ visible: { opacity: 1, y: 0 } }}
+                          transition={{ delay: 0.6, duration: 1, ease: 'easeInOut' }}
+                          className="flex lg:flex-row flex-col justify-between lg:items-center"
+                      >
                           <div className="flex flex-col gap-1">
                               <h1>{education?.jobTitle}</h1>
                               <h2 className="text-sm text-orange-400">{education.company_name}</h2>
                           </div>
                           <div className="flex flex-col mb-8">
-                              <h3>{education?.startDate}</h3>
+                              <h3>{`${formatDate(education?.startDate)} - ${formatDate(education?.endDate)}`}</h3>
                               <p className="text-xl font-light"> {education?.summary}</p>
                               <h3>{education?.jobLocation}</h3>
                           </div>
                           <div className="border border-b opacity-15 mb-7 bg-neutral-800"></div>
-                      </div>
+                      </motion.div>
                   ))}
         </div>
     );
