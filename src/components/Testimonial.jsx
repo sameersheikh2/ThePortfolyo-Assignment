@@ -8,10 +8,10 @@ const Testimonial = ({ testimonials }) => {
         infinite: true,
         centerPadding: '60px',
         autoplay: true,
-        autoplaySpeed: 2500,
+        autoplaySpeed: 100,
         cssEase: 'linear',
         slidesToShow: 1,
-        speed: 2500,
+        speed: 1500,
         slidesToScroll: 1,
         pauseOnHover: true,
         responsive: [
@@ -45,7 +45,7 @@ const Testimonial = ({ testimonials }) => {
         ],
     };
     return (
-        <div className="w-[90%] h-[300px] m-auto mt-32 mb-32">
+        <div className="w-[90%] h-[600px] md:h-[500px] m-auto mt-32 mb-32">
             <h2 className="text-neutral-400 text-xl tracking-wider mb-8">Testimonials</h2>
             <div className="slider-container flex flex-col justify-center w-full">
                 <Slider {...settings}>

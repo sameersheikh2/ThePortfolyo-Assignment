@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
@@ -9,7 +9,7 @@ import Projects from '../components/Projects';
 import Timeline from '../components/Timeline';
 import Testimonial from '../components/Testimonial';
 import Contact from '../components/Contact';
-function Home() {
+const Home = () => {
     const params = useParams();
     const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ function Home() {
     const filteredExperience = user?.timeline?.filter((item) => !item.forEducation && item.enabled);
 
     if (isLoading) {
-        return <div className="w-full h-screen bg-black flex items-center justify-center text-center">Loading..</div>;
+        return <div className="welcome w-full h-screen bg-black flex items-center justify-center text-center">Loading..</div>;
     }
     return (
         <>
@@ -66,9 +66,9 @@ function Home() {
             <Services services={filteredServices} />
             <Timeline educations={filteredEducation} experiences={filteredExperience} />
             <Testimonial testimonials={filteredTestimonials} />
-            <Contact />
+            <Contact social_handles={filteredSocialHandles} about={user?.abouts} />
         </>
     );
-}
+};
 
 export default Home;
